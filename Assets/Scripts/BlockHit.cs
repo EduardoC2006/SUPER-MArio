@@ -6,14 +6,23 @@ public class BlockHit : MonoBehaviour
     public GameObject item;
     public Sprite emptyBlock;
     public int maxHits = -1;
+    public bool breakable;
     private bool animating;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!animating && maxHits != 0 && collision.gameObject.CompareTag("Player"))
         {
-            if (collision.transform.DotTest(transform, Vector2.up)) {
-                Hit();
+            if (collision.transform.DotTest(transform, Vector2.up))
+            {
+                Player player = collision.gameObject.GetComponent<Player>();
+
+                // big mario breaks empty bricks
+                if (breakable && item == null && player != null && player.big) {
+                    Break();
+                } else {
+                    Hit();
+                }
             }
         }
     }
@@ -34,6 +43,35 @@ public class BlockHit : MonoBehaviour
         }
 
         StartCoroutine(Animate());
+    }
+
+    private void Break()
+    {
+        Sprite sprite = GetComponent<SpriteRenderer>().sprite;
+        Vector2[] velocities = {
+            new Vector2(-3f, 12f), new Vector2(3f, 12f),
+            new Vector2(-3f, 8f), new Vector2(3f, 8f),
+        };
+
+        foreach (Vector2 velocity in velocities)
+        {
+            GameObject piece = new GameObject("Brick Piece");
+            piece.transform.position = transform.position + (Vector3)(velocity.normalized * 0.25f);
+            piece.transform.localScale = Vector3.one * 0.5f;
+
+            SpriteRenderer renderer = piece.AddComponent<SpriteRenderer>();
+            renderer.sprite = sprite;
+            renderer.sortingOrder = 5;
+
+            Rigidbody2D rigidbody = piece.AddComponent<Rigidbody2D>();
+            rigidbody.gravityScale = 4f;
+            rigidbody.linearVelocity = velocity;
+            rigidbody.angularVelocity = velocity.x * 120f;
+
+            Destroy(piece, 2f);
+        }
+
+        Destroy(gameObject);
     }
 
     private IEnumerator Animate()
