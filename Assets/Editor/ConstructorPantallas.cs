@@ -49,10 +49,14 @@ public static class ConstructorPantallas
         GameObject lienzo = Lienzo("Marcador", 10);
         Hud hud = lienzo.AddComponent<Hud>();
 
+        // posiciones acomodadas a mano en el 1-1
         hud.livesText = Texto(lienzo.transform, "MARIO\n  x3", 24, new Vector2(0.1f, 1f), new Vector2(0f, -48f), TextAnchor.UpperLeft);
-        Imagen(lienzo.transform, "Coin", new Vector2(0.44f, 1f), new Vector2(0f, -86f), new Vector2(40f, 40f));
-        hud.coinsText = Texto(lienzo.transform, "x00", 24, new Vector2(0.44f, 1f), new Vector2(110f, -74f), TextAnchor.UpperLeft);
-        hud.worldText = Texto(lienzo.transform, "MUNDO\n 1-1", 24, new Vector2(0.72f, 1f), new Vector2(0f, -48f), TextAnchor.UpperLeft);
+        hud.livesText.rectTransform.sizeDelta = new Vector2(136.4467f, 80f);
+        Imagen(lienzo.transform, "Coin", new Vector2(0.44f, 1f), new Vector2(41f, -68f), new Vector2(40f, 40f));
+        hud.coinsText = Texto(lienzo.transform, "x00", 24, new Vector2(0.44f, 1f), new Vector2(70f, -59f), TextAnchor.UpperLeft);
+        hud.coinsText.rectTransform.sizeDelta = new Vector2(78.6918f, 34f);
+        hud.worldText = Texto(lienzo.transform, "MUNDO\n 1-1", 24, new Vector2(0.72f, 1f), new Vector2(175f, -48f), TextAnchor.UpperLeft);
+        hud.worldText.rectTransform.sizeDelta = new Vector2(132.7229f, 62.4328f);
 
         PrefabUtility.SaveAsPrefabAsset(lienzo, RutaMarcador);
         Object.DestroyImmediate(lienzo);

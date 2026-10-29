@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Construye los niveles nuevos a partir de las piezas del 1-1.
 // Menú: Herramientas > Construir nivel 1-2
-public static class ConstructorNiveles
+public static partial class ConstructorNiveles
 {
     private const string Prefabs = "Assets/Prefabs/";
     private const string Escenas = "Assets/Scenes/";
@@ -119,7 +119,7 @@ public static class ConstructorNiveles
         FlagPole poste = bandera.GetComponent<FlagPole>();
         Asignar(poste, "castle", castillo.transform);
         Asignar(poste, "nextWorld", 1);
-        Asignar(poste, "nextStage", 1);
+        Asignar(poste, "nextStage", 3);
 
         GuardarEscena(nivel);
 
