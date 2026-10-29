@@ -12,12 +12,14 @@ public class SideScrolling : MonoBehaviour
     public Color undergroundColor = Color.black;
 
     private Color surfaceColor;
+    private float minX;
 
     private void Awake()
     {
         camera = GetComponent<Camera>();
         player = GameObject.FindWithTag("Player").transform;
         surfaceColor = camera.backgroundColor;
+        minX = transform.position.x;
     }
 
     private void Start()
@@ -28,9 +30,9 @@ public class SideScrolling : MonoBehaviour
 
     private void LateUpdate()
     {
-        // track the player moving to the right
+        // track the player in both directions, never past the start of the level
         Vector3 cameraPosition = transform.position;
-        cameraPosition.x = Mathf.Max(cameraPosition.x, player.position.x);
+        cameraPosition.x = Mathf.Max(minX, player.position.x);
         transform.position = cameraPosition;
     }
 
