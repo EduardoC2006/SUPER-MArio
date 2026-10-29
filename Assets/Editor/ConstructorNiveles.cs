@@ -33,7 +33,7 @@ public static class ConstructorNiveles
         padre = new GameObject("Subterráneo").transform;
 
         // Muro de entrada y techo
-        Rect("UndergroundBlock", -4, Suelo - 3, 3, Techo - Suelo + 4);
+        Rect("UndergroundBlock", -20, Suelo - 3, 19, Techo - Suelo + 4);
         Rect("UndergroundBrick", -1, Techo, 171, 1);
 
         // Suelo con tres fosos
@@ -134,6 +134,39 @@ public static class ConstructorNiveles
         Debug.Log("[Constructor] Nivel 1-2 listo");
     }
 
+    // El suelo del inicio llega más a la izquierda para que no quede un hueco
+    // cuando la ventana es más ancha que 16:9
+    [MenuItem("Herramientas/Alargar suelo del 1-1 y del menú")]
+    public static void AlargarSuelo()
+    {
+        foreach (string nombre in new[] { "1-1", "Menu" })
+        {
+            var escena = EditorSceneManager.OpenScene(Escenas + nombre + ".unity");
+            SpriteRenderer primero = null;
+
+            foreach (var sprite in Object.FindObjectsByType<SpriteRenderer>(FindObjectsSortMode.None))
+            {
+                if (sprite.gameObject.name != "Ground") continue;
+                if (primero == null || sprite.transform.position.x < primero.transform.position.x) primero = sprite;
+            }
+
+            const float borde = -20.5f;
+            float derecha = primero.transform.position.x + primero.size.x / 2f;
+            if (primero.transform.position.x - primero.size.x / 2f <= borde) continue;
+
+            var tamano = new Vector2(derecha - borde, primero.size.y);
+            Vector3 posicion = primero.transform.position;
+            posicion.x = (derecha + borde) / 2f;
+            primero.transform.position = posicion;
+            primero.size = tamano;
+            primero.GetComponent<BoxCollider2D>().size = tamano;
+
+            EditorSceneManager.MarkSceneDirty(escena);
+            EditorSceneManager.SaveScene(escena);
+        }
+        Debug.Log("[Constructor] Suelo alargado");
+    }
+
     private struct Escena
     {
         public UnityEngine.SceneManagement.Scene escena;
@@ -146,8 +179,9 @@ public static class ConstructorNiveles
     private static Escena PrepararEscena(string nombre)
     {
         string ruta = Escenas + nombre + ".unity";
-        AssetDatabase.DeleteAsset(ruta);
-        AssetDatabase.CopyAsset(Escenas + "1-1.unity", ruta);
+        // se copia el contenido encima para que la escena conserve su GUID
+        System.IO.File.Copy(Escenas + "1-1.unity", ruta, true);
+        AssetDatabase.ImportAsset(ruta, ImportAssetOptions.ForceUpdate);
 
         var escena = EditorSceneManager.OpenScene(ruta);
         Transform jugador = Object.FindFirstObjectByType<Player>().transform;
