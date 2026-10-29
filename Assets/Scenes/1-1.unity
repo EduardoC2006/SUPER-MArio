@@ -2206,6 +2206,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Marcador
       objectReference: {fileID: 0}
+    - target: {fileID: 1081809192548979683, guid: 35c1bd1215735c92ea7a7a9642921454, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 136.4467
+      objectReference: {fileID: 0}
+    - target: {fileID: 2419414329765559657, guid: 35c1bd1215735c92ea7a7a9642921454, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 132.7229
+      objectReference: {fileID: 0}
+    - target: {fileID: 2419414329765559657, guid: 35c1bd1215735c92ea7a7a9642921454, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 62.4328
+      objectReference: {fileID: 0}
+    - target: {fileID: 2419414329765559657, guid: 35c1bd1215735c92ea7a7a9642921454, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 2419414329765559657, guid: 35c1bd1215735c92ea7a7a9642921454, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -48
+      objectReference: {fileID: 0}
     - target: {fileID: 4627549071487256502, guid: 35c1bd1215735c92ea7a7a9642921454, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2285,6 +2305,30 @@ PrefabInstance:
     - target: {fileID: 4627549071487256502, guid: 35c1bd1215735c92ea7a7a9642921454, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825483627061198652, guid: 35c1bd1215735c92ea7a7a9642921454, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825483627061198652, guid: 35c1bd1215735c92ea7a7a9642921454, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -68
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839112980991710762, guid: 35c1bd1215735c92ea7a7a9642921454, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 78.6918
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839112980991710762, guid: 35c1bd1215735c92ea7a7a9642921454, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839112980991710762, guid: 35c1bd1215735c92ea7a7a9642921454, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839112980991710762, guid: 35c1bd1215735c92ea7a7a9642921454, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -59
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
