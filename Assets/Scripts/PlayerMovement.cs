@@ -11,6 +11,10 @@ public class PlayerMovement : MonoBehaviour
     private float inputAxis;
 
     public float moveSpeed = 8f;
+    public float swimSpeed = 5f;
+    public float swimForce = 6f;
+    public float swimGravity = -10f;
+    public float maxSinkSpeed = -3f;
     public float maxJumpHeight = 5f;
     public float maxJumpTime = 1f;
     public float jumpForce => (2f * maxJumpHeight) / (maxJumpTime / 2f);
@@ -21,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     public bool running => Mathf.Abs(velocity.x) > 0.25f || Mathf.Abs(inputAxis) > 0.25f;
     public bool sliding => (inputAxis > 0f && velocity.x < 0f) || (inputAxis < 0f && velocity.x > 0f);
     public bool falling => velocity.y < 0f && !grounded;
+    public bool swimming { get; set; }
 
     private void Awake()
     {
@@ -51,11 +56,36 @@ public class PlayerMovement : MonoBehaviour
 
         grounded = rigidbody.Raycast(Vector2.down);
 
+        if (swimming)
+        {
+            SwimMovement();
+            return;
+        }
+
         if (grounded) {
             GroundedMovement();
         }
 
         ApplyGravity();
+    }
+
+    private void SwimMovement()
+    {
+        if (grounded) {
+            velocity.y = Mathf.Max(velocity.y, 0f);
+        }
+
+        // every press of jump is a stroke, even in mid water
+        if (Input.GetButtonDown("Jump"))
+        {
+            velocity.y = swimForce;
+            AudioManager.Play("Nado");
+        }
+
+        // sink slowly instead of falling
+        velocity.y += swimGravity * Time.deltaTime;
+        velocity.y = Mathf.Max(velocity.y, maxSinkSpeed);
+        jumping = !grounded;
     }
 
     private void FixedUpdate()
@@ -76,7 +106,8 @@ public class PlayerMovement : MonoBehaviour
     {
         // accelerate / decelerate
         inputAxis = Input.GetAxis("Horizontal");
-        velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
+        float speed = swimming ? swimSpeed : moveSpeed;
+        velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * speed, speed * Time.deltaTime);
 
         // check if running into a wall
         if (rigidbody.Raycast(Vector2.right * velocity.x)) {
