@@ -31,7 +31,20 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
-        NewGame();
+        // allow playing any level directly from the editor
+        string[] level = SceneManager.GetActiveScene().name.Split('-');
+
+        if (level.Length == 2 && int.TryParse(level[0], out int world) && int.TryParse(level[1], out int stage) && (world != 1 || stage != 1))
+        {
+            lives = 3;
+            coins = 0;
+            this.world = world;
+            this.stage = stage;
+        }
+        else
+        {
+            NewGame();
+        }
     }
 
     public void NewGame()
