@@ -129,7 +129,8 @@ public static class ConstructorNiveles
         Asignar(poste11, "nextStage", 2);
         EditorSceneManager.SaveScene(poste11.gameObject.scene);
 
-        AgregarABuild("1-1", "1-2");
+        ConstructorPantallas.AgregarMarcador(Escenas + "1-2.unity");
+        OrdenarBuild();
         Debug.Log("[Constructor] Nivel 1-2 listo");
     }
 
@@ -179,14 +180,15 @@ public static class ConstructorNiveles
         EditorSceneManager.SaveScene(nivel.escena);
     }
 
-    private static void AgregarABuild(params string[] nombres)
+    // El menú va primero para que el ejecutable arranque en él
+    public static void OrdenarBuild()
     {
+        string[] orden = { "Menu", "Lives", "GameOver", "1-1", "1-2", "1-3", "1-4" };
         var lista = new System.Collections.Generic.List<EditorBuildSettingsScene>();
-        foreach (string nombre in nombres) {
-            lista.Add(new EditorBuildSettingsScene(Escenas + nombre + ".unity", true));
-        }
-        foreach (EditorBuildSettingsScene actual in EditorBuildSettings.scenes) {
-            if (!lista.Exists(s => s.path == actual.path)) lista.Add(actual);
+        foreach (string nombre in orden)
+        {
+            string ruta = Escenas + nombre + ".unity";
+            if (System.IO.File.Exists(ruta)) lista.Add(new EditorBuildSettingsScene(ruta, true));
         }
         EditorBuildSettings.scenes = lista.ToArray();
     }

@@ -72,3 +72,6 @@ crashlytics-build.properties
 
 # Solución generada por Unity 6
 *.slnx
+
+# Volcados de Mono al cerrar Unity
+mono_crash.*

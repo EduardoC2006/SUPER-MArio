@@ -31,19 +31,18 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
+        lives = 3;
+        coins = 0;
+        world = 1;
+        stage = 1;
+
         // allow playing any level directly from the editor
         string[] level = SceneManager.GetActiveScene().name.Split('-');
 
-        if (level.Length == 2 && int.TryParse(level[0], out int world) && int.TryParse(level[1], out int stage) && (world != 1 || stage != 1))
+        if (level.Length == 2 && int.TryParse(level[0], out int w) && int.TryParse(level[1], out int s))
         {
-            lives = 3;
-            coins = 0;
-            this.world = world;
-            this.stage = stage;
-        }
-        else
-        {
-            NewGame();
+            world = w;
+            stage = s;
         }
     }
 
@@ -57,9 +56,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        // TODO: show game over screen
-
-        NewGame();
+        SceneManager.LoadScene("GameOver");
     }
 
     public void LoadLevel(int world, int stage)
@@ -67,6 +64,12 @@ public class GameManager : MonoBehaviour
         this.world = world;
         this.stage = stage;
 
+        // show the world and remaining lives before the level starts
+        SceneManager.LoadScene("Lives");
+    }
+
+    public void StartLevel()
+    {
         SceneManager.LoadScene($"{world}-{stage}");
     }
 
