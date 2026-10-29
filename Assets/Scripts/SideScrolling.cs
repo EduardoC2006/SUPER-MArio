@@ -44,6 +44,7 @@ public class SideScrolling : MonoBehaviour
         transform.position = cameraPosition;
 
         camera.backgroundColor = underground ? undergroundColor : surfaceColor;
+        AudioManager.SetUnderground(underground);
     }
 
 }

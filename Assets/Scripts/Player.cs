@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
         bigRenderer.enabled = false;
         deathAnimation.enabled = true;
 
+        AudioManager.StopMusic();
+        AudioManager.Play("Muerte");
         GameManager.Instance.ResetLevel(3f);
     }
 
@@ -56,6 +58,8 @@ public class Player : MonoBehaviour
 
     public void Shrink()
     {
+        AudioManager.Play("Encoger");
+
         smallRenderer.enabled = true;
         bigRenderer.enabled = false;
         activeRenderer = smallRenderer;

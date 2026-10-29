@@ -38,8 +38,15 @@ public class BlockHit : MonoBehaviour
             spriteRenderer.sprite = emptyBlock;
         }
 
-        if (item != null) {
+        AudioManager.Play("Golpe");
+
+        if (item != null)
+        {
             Instantiate(item, transform.position, Quaternion.identity);
+
+            if (item.GetComponent<BlockCoin>() == null) {
+                AudioManager.Play("Aparece");
+            }
         }
 
         StartCoroutine(Animate());
@@ -71,6 +78,7 @@ public class BlockHit : MonoBehaviour
             Destroy(piece, 2f);
         }
 
+        AudioManager.Play("Ladrillo");
         Destroy(gameObject);
     }
 

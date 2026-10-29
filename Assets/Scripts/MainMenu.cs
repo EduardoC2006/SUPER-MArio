@@ -23,6 +23,7 @@ public class MainMenu : MonoBehaviour
     private void Select(int index)
     {
         selected = (index + options.Length) % options.Length;
+        AudioManager.Play("MenuMover");
 
         // keep the mushroom cursor next to the selected option
         Vector2 position = cursor.anchoredPosition;
@@ -32,6 +33,8 @@ public class MainMenu : MonoBehaviour
 
     private void Confirm()
     {
+        AudioManager.Play("MenuElegir");
+
         if (selected == 0)
         {
             GameManager.Instance.NewGame();

@@ -22,6 +22,8 @@ public class FlagPole : MonoBehaviour
     private IEnumerator LevelCompleteSequence(Transform player)
     {
         player.GetComponent<PlayerMovement>().enabled = false;
+        AudioManager.StopMusic();
+        AudioManager.Play("NivelCompleto");
 
         yield return MoveTo(player, poleBottom.position);
         yield return MoveTo(player, player.position + Vector3.right);

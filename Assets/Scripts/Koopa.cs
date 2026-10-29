@@ -53,6 +53,7 @@ public class Koopa : MonoBehaviour
     private void EnterShell()
     {
         shelled = true;
+        AudioManager.Play("Pisar");
 
         GetComponent<SpriteRenderer>().sprite = shellSprite;
         GetComponent<AnimatedSprite>().enabled = false;
@@ -62,6 +63,7 @@ public class Koopa : MonoBehaviour
     private void PushShell(Vector2 direction)
     {
         pushed = true;
+        AudioManager.Play("Patada");
 
         GetComponent<Rigidbody2D>().isKinematic = false;
 
@@ -77,6 +79,7 @@ public class Koopa : MonoBehaviour
     {
         GetComponent<AnimatedSprite>().enabled = false;
         GetComponent<DeathAnimation>().enabled = true;
+        AudioManager.Play("Patada");
         Destroy(gameObject, 3f);
     }
 

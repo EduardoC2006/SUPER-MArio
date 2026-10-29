@@ -21,6 +21,7 @@ public class Pipe : MonoBehaviour
     private IEnumerator Enter(Transform player)
     {
         player.GetComponent<PlayerMovement>().enabled = false;
+        AudioManager.Play("Tuberia");
 
         Vector3 enteredPosition = transform.position + enterDirection;
         Vector3 enteredScale = Vector3.one * 0.5f;

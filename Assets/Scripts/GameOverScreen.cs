@@ -7,6 +7,7 @@ public class GameOverScreen : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Play("GameOver");
         Invoke(nameof(BackToMenu), duration);
     }
 

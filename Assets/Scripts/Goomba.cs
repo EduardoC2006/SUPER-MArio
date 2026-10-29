@@ -33,6 +33,7 @@ public class Goomba : MonoBehaviour
         GetComponent<EntityMovement>().enabled = false;
         GetComponent<AnimatedSprite>().enabled = false;
         GetComponent<SpriteRenderer>().sprite = flatSprite;
+        AudioManager.Play("Pisar");
         Destroy(gameObject, 0.5f);
     }
 
@@ -40,6 +41,7 @@ public class Goomba : MonoBehaviour
     {
         GetComponent<AnimatedSprite>().enabled = false;
         GetComponent<DeathAnimation>().enabled = true;
+        AudioManager.Play("Patada");
         Destroy(gameObject, 3f);
     }
 

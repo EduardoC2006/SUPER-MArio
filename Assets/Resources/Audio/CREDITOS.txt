@@ -1,0 +1,12 @@
+Audio con licencia CC0 (dominio público), sin atribución obligatoria.
+
+Música (Menu, Superficie, Subterraneo, Castillo) y todos los efectos:
+  Juhani Junkala (SubspaceAudio)
+  https://opengameart.org/content/5-chiptunes-action
+  https://opengameart.org/content/512-sound-effects-8-bit-style
+
+Efecto NivelCompleto: primeros 6 s de "Ending", del mismo pack de música.
+
+Música Acuatico:
+  ThePixel, "slow"
+  https://opengameart.org/content/8bitmusic
