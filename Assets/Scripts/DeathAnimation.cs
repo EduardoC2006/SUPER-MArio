@@ -5,6 +5,7 @@ public class DeathAnimation : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     public Sprite deadSprite;
+    public float jumpVelocity = 10f;
 
     private void Reset()
     {
@@ -60,7 +61,6 @@ public class DeathAnimation : MonoBehaviour
         float elapsed = 0f;
         float duration = 3f;
 
-        float jumpVelocity = 10f;
         float gravity = -36f;
 
         Vector3 velocity = Vector3.up * jumpVelocity;

@@ -7,8 +7,19 @@ public class DeathBarrier : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.gameObject.SetActive(false);
-            GameManager.Instance.ResetLevel(3f);
+            Player player = other.GetComponent<Player>();
+
+            if (!player.dead)
+            {
+                // bring mario back to the bottom of the screen so the jump is visible
+                Camera camera = Camera.main;
+                Vector3 position = player.transform.position;
+                position.y = camera.transform.position.y - camera.orthographicSize - 0.5f;
+                player.transform.position = position;
+
+                player.deathAnimation.jumpVelocity = 20f;
+                player.Death();
+            }
         }
         else
         {
